@@ -14,7 +14,7 @@ def is_allowed_operation(val: str) -> TypeGuard[AllowedOperations]:
 
 start_time = time.perf_counter()
 calculations: list[Calculation] = list()
-with open('python/day6/real_data.txt', 'r') as f:
+with open('python/day6/data.txt', 'r') as f:
   rows = f.readlines()
   for i, row in enumerate(rows):
     cols = row.split()
