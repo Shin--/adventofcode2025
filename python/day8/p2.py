@@ -39,9 +39,9 @@ for junction_box1 in junction_boxes:
         distance_map[d] = (junction_box1, junction_box2)
 
 distances = list(sorted(distance_map.keys()))
-connections = 0
+latest_join: tuple[Point3D, Point3D] | None = None
 for distance in distances:
-  if connections >= 1000:
+  if len(circuits) == 1 and len(circuits[0]) == len(junction_boxes):
     break
   if distance not in distance_map:
     raise ValueError
@@ -65,13 +65,12 @@ for distance in distances:
   elif circuit2 and not circuit1:
     circuit2.add(box1)
     circuit_pointers[box1] = circuit2
-  else:
-    continue
-  connections += 1
-
-largest_circuits = sorted(circuits, key=len, reverse=True)[:3]
-circuits_prod = prod([len(circuit) for circuit in largest_circuits])
+  latest_join = (box1, box2)
 
 end_time = time.perf_counter() - start_time
-print("Circuits value:", circuits_prod)
+if not latest_join:
+  raise ValueError
+
+box1, box2 = latest_join
+print("Circuits value:", box1[0] * box2[0])
 print(f"Time: {(end_time * 1000):.4f} ms")
