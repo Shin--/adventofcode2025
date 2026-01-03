@@ -1,5 +1,5 @@
 from functools import lru_cache
-from math import prod, sqrt
+from math import sqrt
 import time
 
 
