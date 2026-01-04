@@ -9,10 +9,10 @@ start_time = time.perf_counter()
 
 square_map: dict[int, list[int]] = defaultdict(list)
 
-with open('python/day9/real_data.txt', 'r') as f:
+with open('python/day9/data.txt', 'r') as f:
   rows = f.readlines()
-  for i, row in enumerate(rows):
-    x, y = row.split(',')
+  for i, line in enumerate(rows):
+    x, y = line.split(',')
     square_map[int(y)].append(int(x))
 
 def square_size(p1: Point2D, p2: Point2D) -> int:
@@ -23,6 +23,7 @@ def square_size(p1: Point2D, p2: Point2D) -> int:
 for row in square_map.keys():
   for col in square_map[row]:
     root_square = (row, col)
+    # Just go through every row and get min and max col to form a square
     for compare_row in square_map.keys():
       min_col, max_col = min(square_map[compare_row]), max(square_map[compare_row])
       # print(square_size(root_square, (compare_row, min_col)), "->", root_square, (compare_row, min_col))
