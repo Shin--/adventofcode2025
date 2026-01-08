@@ -11,7 +11,7 @@ start_time = time.perf_counter()
 square_map: dict[int, list[int]] = defaultdict(list)
 squares: list[Point2D] = list()
 
-with open('python/day9/real_data.txt', 'r') as f:
+with open('python/day9/data.txt', 'r') as f:
   rows = f.readlines()
   for i, line in enumerate(rows):
     y, x = line.split(',')
